@@ -1,0 +1,30 @@
+# config.yaml
+
+dataset:
+  name: ERA5_Norwaysea
+  paths:
+    wave: "Data/ERA5_Norwaysea/data_stream-wave_stepType-instant.nc"
+    wind: "Data/ERA5_Norwaysea/data_stream-oper_stepType-instant.nc"
+  seq_len: 12
+  pred_len: 1
+  normalize: true
+  train_split: 0.8   # fraction of data for training
+  val_split: 0.1     # fraction of data for validation
+  test_split: 0.1    # fraction of data for testing (computed as 1 - train - val)
+
+training:
+  epochs: 50
+  batch_size: 16
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  device: "cuda"      # "cpu" or "cuda"
+  save_dir: "checkpoints"
+  save_path: "checkpoints/best_model.pth"
+
+model:
+  type: "MuSHiNet"
+  input_dim: 5       
+  hidden_dim: 64
+  output_dim: 1       # predicting SWH
+  num_layers: 3
+
